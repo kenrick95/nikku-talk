@@ -211,7 +211,7 @@
         </section>
 
         <section>
-          <h2>Decoding BRSTM</h2>
+          <h2>Extracting audio out of BRSTM file</h2>
         </section>
 
         <section>
@@ -245,7 +245,8 @@
 
         <section>
           <section>
-            <h2>Decoding BRSTM (for real)</h2>
+            <h2>Extracting BRSTM</h2>
+            <p>For real</p>
           </section>
 
           <section>
@@ -257,20 +258,39 @@
             </ul>
           </section>
           <section>
-            <p>In summary,</p>
+            <p>tl;dr:</p>
 
             <ul>
               <li>Format: BRSTM</li>
               <li>Codec: PCM or ADPCM</li>
-              <li>Channels: specified in file</li>
-              <li>Interleaved, in "blocks"</li>
+              <li># Channels: specified in file</li>
+              <li>Sections: HEAD, ADPC, DATA</li>
+              <li>ADPC, DATA: Interleaved, in "blocks"</li>
             </ul>
           </section>
 
           <section>
-            <h2>ADPCM</h2>
+            <p>
+              So I started a simple page that accepts a BRSTM file and read its
+              metadata
+            </p>
+          </section>
+
+          <section>
+            <p>Insert iframe or image?</p>
+          </section>
+
+          <section>
+            <p>It works. What's next?</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Decoding ADPCM</h2>
+          </section>
+          <section>
             <p>This is the codec</p>
-            <p>Goal: decode this</p>
+            <i class="fragment">How to turn ADPCM into PCM?</i>
           </section>
 
           <section>
@@ -278,493 +298,376 @@
           </section>
 
           <section>
-            <h2><a href="https://www.npmjs.com/package/imaadpcm">imaadpcm</a> [insert npm screenshot]</h2>
+            <h2>
+              <a href="https://www.npmjs.com/package/imaadpcm">imaadpcm</a>
+              [insert npm screenshot]
+            </h2>
           </section>
 
           <section>
-            <h2>OMG!?</h2>
+            <h2>😱</h2>
+          </section>
+
+          <section>
+            <p>and the input/output looks as expected!</p>
           </section>
         </section>
-        <section>
-          <h2>Slides</h2>
-          <p>
-            Not a coder? Not a problem. There's a fully-featured visual editor
-            for authoring these, try it out at
-            <a href="https://slides.com" target="_blank">https://slides.com</a>.
-          </p>
-        </section>
 
         <section>
-          <h2>Point of View</h2>
-          <p>Press <strong>ESC</strong> to enter the slide overview.</p>
-          <p>
-            Hold down the <strong>alt</strong> key (<strong>ctrl</strong> in
-            Linux) and click on any element to zoom towards it using
-            <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Click again to
-            zoom back out.
-          </p>
-          <p>
-            (NOTE: Use ctrl + click in Linux.)
-          </p>
-        </section>
-
-        <section>
-          <h2>Touch Optimized</h2>
-          <p>
-            Presentations look great on touch devices, like mobile phones and
-            tablets. Simply swipe through your slides.
-          </p>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ## Markdown support
-
-            Write content using inline or external Markdown.
-            Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-            ```
-            <section data-markdown>
-              ## Markdown support
-
-              Write content using inline or external Markdown.
-              Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-            </section>
-            ```
-          </script>
-        </section>
-
-        <section>
-          <section id="fragments">
-            <h2>Fragments</h2>
-            <p>Hit the next arrow...</p>
-            <p class="fragment">... to step through ...</p>
-            <p>
-              <span class="fragment">... a</span>
-              <span class="fragment">fragmented</span>
-              <span class="fragment">slide.</span>
-            </p>
-
+          <section>
+            <h2>Audio Player</h2>
             <aside class="notes">
-              This slide has fragments which are also stepped through in the
-              notes window.
+              We need to build the "audio player", now that we have the audio
+              data from BRSTM
+            </aside>
+          </section>
+
+          <section>
+            <h2>Web Audio API</h2>
+            <aside class="notes">
+              So we use Web Audio API. Heard rumours that it is so hard to use,
+              I wonder if it's true.
             </aside>
           </section>
           <section>
-            <h2>Fragment Styles</h2>
-            <p>There's different types of fragments, like:</p>
-            <p class="fragment grow">grow</p>
-            <p class="fragment shrink">shrink</p>
-            <p class="fragment fade-out">fade-out</p>
-            <p>
-              <span style="display: inline-block;" class="fragment fade-right"
-                >fade-right,
-              </span>
-              <span style="display: inline-block;" class="fragment fade-up"
-                >up,
-              </span>
-              <span style="display: inline-block;" class="fragment fade-down"
-                >down,
-              </span>
-              <span style="display: inline-block;" class="fragment fade-left"
-                >left</span
-              >
-            </p>
-            <p class="fragment fade-in-then-out">fade-in-then-out</p>
-            <p class="fragment fade-in-then-semi-out">fade-in-then-semi-out</p>
-            <p>
-              Highlight <span class="fragment highlight-red">red</span>
-              <span class="fragment highlight-blue">blue</span>
-              <span class="fragment highlight-green">green</span>
-            </p>
+            Insert illustration of Web Audio API:
+
+            <!--
+            <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+const audioContext = new AudioContext(); // Web Audio API
+const bufferSource = audioContext.createBufferSource(); // Web Audio API
+
+const pcm = imaadpcm.decode(adpcm, metadata.blockSize); // external library
+const normalizedPcm = normalize(pcm); // normalize [-32767..32768] (Int16) to [-1..1] (Float32)
+
+// Create a Audio Buffer, part of Web Audio API
+const audioBuffer = this.audioContext.createBuffer(1, normalizedPcm.length, metadata.sampleRate);
+// Set pcm data to audio buffer
+audioBuffer.getChannelData(0).set(normalizedPcm);
+
+// Connecting stuffs, and play it
+bufferSource.buffer = audioBuffer;
+bufferSource.connect(audioContext.destination);
+bufferSource.start(0);
+                        </code></pre> -->
           </section>
-        </section>
-
-        <section id="transitions">
-          <h2>Transition Styles</h2>
-          <p>
-            You can select from different transitions, like: <br />
-            <a href="?transition=none#/transitions">None</a> -
-            <a href="?transition=fade#/transitions">Fade</a> -
-            <a href="?transition=slide#/transitions">Slide</a> -
-            <a href="?transition=convex#/transitions">Convex</a> -
-            <a href="?transition=concave#/transitions">Concave</a> -
-            <a href="?transition=zoom#/transitions">Zoom</a>
-          </p>
-        </section>
-
-        <section id="themes">
-          <h2>Themes</h2>
-          <p>
-            reveal.js comes with a few themes built in: <br />
-            <!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;"
-              >Black (default)</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;"
-              >White</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;"
-              >League</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;"
-              >Sky</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;"
-              >Beige</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;"
-              >Simple</a
-            >
-            <br />
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;"
-              >Serif</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;"
-              >Blood</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;"
-              >Night</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;"
-              >Moon</a
-            >
-            -
-            <a
-              href="#"
-              onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;"
-              >Solarized</a
-            >
-          </p>
+          <section>
+            So how's it?
+          </section>
+          <section>
+            Insert image to my commit
+          </section>
         </section>
 
         <section>
-          <section data-background="#dddddd">
-            <h2>Slide Backgrounds</h2>
-            <p>
-              Set <code>data-background="#dddddd"</code> on a slide to change
-              the background color. All CSS color formats are supported.
-            </p>
-            <a href="#" class="navigate-down">
-              <img
-                width="178"
-                height="238"
-                data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png"
-                alt="Down arrow"
-              />
-            </a>
+          <section>
+            <h2>🕵️‍</h2>
+            <aside class="notes">
+              Something must have gone wrong. Did I decode BRSTM wrongly? If I'm
+              wrong, what went wrong?
+            </aside>
           </section>
-          <section
-            data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png"
-          >
-            <h2>Image Backgrounds</h2>
-            <pre><code class="hljs html">&lt;section data-background="image.png"&gt;</code></pre>
+
+          <section>
+            <h2>ADPCM</h2>
+            <span class="fragment">so many of them ...</span>
+            <aside class="notes">
+              Further research about ADPCM shows that there are so many
+              different "ADPCM"
+
+              <!-- https://wiki.multimedia.cx/index.php/Category:ADPCM_Audio_Codecs -->
+            </aside>
           </section>
-          <section
-            data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png"
-            data-background-repeat="repeat"
-            data-background-size="100px"
-          >
-            <h2>Tiled Backgrounds</h2>
-            <pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+
+          <section>
+            Insert screenshot of
+            <!-- https://wiki.multimedia.cx/index.php/Category:ADPCM_Audio_Codecs -->
           </section>
-          <section
-            data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm"
-            data-background-color="#000000"
-          >
-            <div
-              style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"
-            >
-              <h2>Video Backgrounds</h2>
-              <pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-            </div>
+
+          <section>
+            <h2>Decoding <span class="fragment">Nintendo </span>ADPCM</h2>
+            <aside class="notes">
+              So when I say decoding ADPCM in context of BRSTM, it should be
+              noted that the ADPCM codec is specific to Nintendo.
+            </aside>
           </section>
-          <section data-background="http://i.giphy.com/90F8aUepslB84.gif">
-            <h2>... and GIFs!</h2>
+
+          <section>
+            <p>That means I can't use that npm package</p>
+            <em class="fragment">sigh</em>
           </section>
         </section>
-
-        <section
-          data-transition="slide"
-          data-background="#4d7e65"
-          data-background-transition="zoom"
-        >
-          <h2>Background Transitions</h2>
-          <p>
-            Different background transitions are available via the
-            backgroundTransition option. This one's called "zoom".
-          </p>
-          <pre><code class="hljs javascript">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-        </section>
-
-        <section
-          data-transition="slide"
-          data-background="#b5533c"
-          data-background-transition="zoom"
-        >
-          <h2>Background Transitions</h2>
-          <p>
-            You can override background transitions per-slide.
-          </p>
-          <pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-        </section>
-
-        <section
-          data-background-iframe="https://hakim.se"
-          data-background-interactive
-        >
-          <div
-            style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;"
-          >
-            <h2>Iframe Backgrounds</h2>
-            <p>
-              Since reveal.js runs on the web, you can easily embed other web
-              content. Try interacting with the page in the background.
-            </p>
-          </div>
+        <section>
+          <section>
+            <em>Scratching head</em>
+          </section>
         </section>
 
         <section>
-          <h2>Pretty Code</h2>
-          <pre><code class="hljs" data-trim data-line-numbers="4,8-11">
-import React, { useState } from 'react';
+          <section>
+            <h2>How did they do it?</h2>
+            <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a> (C)
+          </section>
+          <section>
+            <a
+              href="https://github.com/FFmpeg/FFmpeg/blob/master/libavformat/brstm.c"
+              >brstm.c</a
+            >
+            <aside class="notes">
+              I stare at that file for a very long time yet concluded that the
+              adpcm decoder is not in that file.
+            </aside>
+          </section>
+          <section>
+            <a
+              href="https://github.com/FFmpeg/FFmpeg/blob/master/libavcodec/adpcm.c"
+              >adpcm.c</a
+            >
+            <aside class="notes">
+              It's likely to be here, but it's so long cause it's handling so
+              many ADPCM variants
+            </aside>
+          </section>
+        </section>
 
-function Example() {
-  const [count, setCount] = useState(0);
+        <section>
+          <section>
+            <h2>How did they do it?</h2>
+            <a href="https://github.com/libertyernie/brawltools">BrawlBox</a>
+            (C#)
+          </section>
 
-  return (
-    &lt;div&gt;
-      &lt;p&gt;You clicked {count} times&lt;/p&gt;
-      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
-        Click me
-      &lt;/button&gt;
-    &lt;/div&gt;
-  );
-}
-					</code></pre>
-          <p>
-            Code syntax highlighting courtesy of
-            <a href="http://softwaremaniacs.org/soft/highlight/en/description/"
-              >highlight.js</a
+          <section>
+            Insert BrawlBox screenshot (overview)
+          </section>
+          <section>
+            Insert BrawlBox screenshot (playing)
+          </section>
+
+          <!-- 
+            Randomly put debugger breakpoint
+Load up BRSTM file
+See which one actually does the decoding
+Gotcha!
+These three files are responsible
+
+So how it does?
+Per-block decoding
+Basically magic
+
+Ehm
+My code vs their codes
+
+Yep?
+:(
+
+Scratching head (2)
+At this point, I was lost
+
+EUREKA
+Typos…
+If you copy-paste codes that do magic, make sure you copy-paste them fully! (lesson)
+
+
+          -->
+
+          <section>
+            <a
+              href="https://github.com/libertyernie/brawltools/blob/master/BrawlLib/Wii/Audio/ADPCMStream.cs"
+              >ADPCMStream.cs</a
+            ><br />
+            <a
+              href="https://github.com/libertyernie/brawltools/blob/master/BrawlLib/Wii/Audio/ADPCMState.cs"
+              >ADPCMState.cs</a
+            >
+            <aside class="notes">
+              Should be somewhere here, but it's still very cryptic
+            </aside>
+          </section>
+          <section>
+            <em>So what I do?</em>
+          </section>
+
+          <section>
+            <p>Attach debugger!</p>
+            <aside class="notes">
+              Because Visual Studio has reputation with its debugger
+            </aside>
+          </section>
+
+          <section>
+            Insert screenshots of debugging
+
+            <aside class="notes">
+              and so I thought, between this point and this point, these codes
+              are running, so I should replicate those codes in JS.
+            </aside>
+          </section>
+
+          <section>
+            Insert screenshot
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Eureka!</h2>
+
+            <!-- https://github.com/kenrick95/nikku/blob/f98814df754b6e70109074c2a944516a26ea6c2e/src/brstm.js -->
+          </section>
+
+          <section>
+            Insert iframe to that "state" demo
+          </section>
+        </section>
+
+        <section>
+          <section>
+            Is it finished?
+          </section>
+
+          <section>
+            No
+          </section>
+
+          <section>
+            Audio Player is far from finished
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Nuances</h2>
+
+            <p>Web Audio API is hard</p>
+          </section>
+          <section>
+            <h3>Audio Player</h3>
+            <ul>
+              <li>Play/pause</li>
+              <li>Display current playback time</li>
+              <li>Seek</li>
+              <li>Loop</li>
+            </ul>
+          </section>
+          <section>
+            <h3>Looping</h3>
+            <!--
+              Easy
+Buffer.loop = true
+Buffer.loopStart = … // in SECONDS!?
+Buffer.loopEnd = … // in SECONDS!?
+Comment
+Bizarre. Usually devs will like to avoid floating point numbers, but Web Audio API seems to love using floating points.
+
+
+            -->
+          </section>
+          <section>
+            <h3>Play/pause</h3>
+            <!--
+              Easy now
+These methods have been added to the standard and are widely available
+audioContext.resume
+audioContext.suspend
+
+            -->
+          </section>
+
+          <section>
+            <h3>Seek</h3>
+            <!--
+              Difficulty: Medium
+In ideal world (<audio>), it is easy
+Audio.time=… // in seconds
+In Web Audio API, it’s kinda hard
+Need to stop the audio buffer, reinitialize buffer, then start playback at the sought time
+
+
+            -->
+          </section>
+          <section>
+            <h3>Playback time display</h3>
+            <!-- 
+              How to display current playback time?
+If no loop, it’s easy
+audioContext.currentTime
+If I have loop, it’s impossible
+That current time will keep increase even after loop
+Proposal to add “playback time” to the standard
+My workaround: Don’t rely on their timer, it’s less accurate, but more control in my side.
+Set/unset the current timestamp for play/pause/seek/etc
+
+            -->
+          </section>
+        </section>
+
+        <section>
+          <section>
+            Final product demo
+          </section>
+        </section>
+
+        <section>
+          <section>
+            Marketing
+          </section>
+          <section>
+            Posted to
+            <a
+              href="https://www.reddit.com/r/BRSTM/comments/bky6p0/i_created_a_webbased_brstm_player/"
+              >r/BRSTM</a
+            >
+            and
+            <a href="https://forums.kc-mm.com/index.php?topic=80370.0"
+              >a Nintendo modding forum</a
             >.
-          </p>
+          </section>
+          <section>
+            Reception?
+          </section>
+          <section>
+            Received bug reports, I didn't handle few edge cases. They are kind
+            enough to provide the files to reproduce the bug. 1. BRSTM can
+            contain raw PCMs too (I only handled if they contained ADPCM). 2.
+            BRSTM can have more than one "stream" (pair of channels). So amazed.
+            BrawlBox actually handled this.
+          </section>
         </section>
 
         <section>
-          <h2>Marvelous List</h2>
-          <ul>
-            <li>No order here</li>
-            <li>Or here</li>
-            <li>Or here</li>
-            <li>Or here</li>
-          </ul>
+          <section>
+            Lessons
+          </section>
+
+          <section>
+            Define the project scope before starting anything
+          </section>
+          <section>
+            Do research, lots of research, especially if you are unfamiliar with
+            the topic.
+          </section>
+          <section>
+            Don't be afraid to read others' codes. Codes never lie.
+          </section>
+          <section>
+            Web Audio API is difficult to use 😢
+          </section>
         </section>
 
         <section>
-          <h2>Fantastic Ordered List</h2>
-          <ol>
-            <li>One is smaller than...</li>
-            <li>Two is smaller than...</li>
-            <li>Three!</li>
-          </ol>
-        </section>
-
-        <section>
-          <h2>Tabular Tables</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Value</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Apples</td>
-                <td>$1</td>
-                <td>7</td>
-              </tr>
-              <tr>
-                <td>Lemonade</td>
-                <td>$2</td>
-                <td>18</td>
-              </tr>
-              <tr>
-                <td>Bread</td>
-                <td>$3</td>
-                <td>2</td>
-              </tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section>
-          <h2>Clever Quotes</h2>
-          <p>
-            These guys come in two forms, inline:
-            <q
-              cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations"
-              >The nice thing about standards is that there are so many to
-              choose from</q
-            >
-            and block:
-          </p>
-          <blockquote
-            cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations"
-          >
-            &ldquo;For years there has been a theory that millions of monkeys
-            typing at random on millions of typewriters would reproduce the
-            entire works of Shakespeare. The Internet has proven this theory to
-            be untrue.&rdquo;
-          </blockquote>
-        </section>
-
-        <section>
-          <h2>Intergalactic Interconnections</h2>
-          <p>
-            You can link between slides internally,
-            <a href="#/2/3">like this</a>.
-          </p>
-        </section>
-
-        <section>
-          <h2>Speaker View</h2>
-          <p>
-            There's a
-            <a href="https://github.com/hakimel/reveal.js#speaker-notes"
-              >speaker view</a
-            >. It includes a timer, preview of the upcoming slide as well as
-            your speaker notes.
-          </p>
-          <p>Press the <em>S</em> key to try it out.</p>
-
+          <blockquote>Do things, tell people</blockquote>
           <aside class="notes">
-            Oh hey, these are some notes. They'll be hidden in your
-            presentation, but you can see them if you open the speaker notes
-            window (hit 's' on your keyboard).
+            It's really amazing quote. Heard it long time ago, when I just
+            started university. It made me want to work on side projects. and
+            after finishing it, telling people about it. Either by posting it to
+            HN or writing it up in my blog.
           </aside>
         </section>
 
         <section>
-          <h2>Export to PDF</h2>
-          <p>
-            Presentations can be
-            <a href="https://github.com/hakimel/reveal.js#pdf-export"
-              >exported to PDF</a
-            >, here's an example:
-          </p>
-          <iframe
-            data-src="https://www.slideshare.net/slideshow/embed_code/42840540"
-            width="445"
-            height="355"
-            frameborder="0"
-            marginwidth="0"
-            marginheight="0"
-            scrolling="no"
-            style="border:3px solid #666; margin-bottom:5px; max-width: 100%;"
-            allowfullscreen
-          >
-          </iframe>
-        </section>
-
-        <section>
-          <h2>Global State</h2>
-          <p>
-            Set <code>data-state="something"</code> on a slide and
-            <code>"something"</code>
-            will be added as a class to the document element when the slide is
-            open. This lets you apply broader style changes, like switching the
-            page background.
-          </p>
-        </section>
-
-        <section data-state="customevent">
-          <h2>State Events</h2>
-          <p>
-            Additionally custom events can be triggered on a per slide basis by
-            binding to the <code>data-state</code> name.
-          </p>
-          <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-        </section>
-
-        <section>
-          <h2>Take a Moment</h2>
-          <p>
-            Press B or . on your keyboard to pause the presentation. This is
-            helpful when you're on stage and want to take distracting slides off
-            the screen.
-          </p>
-        </section>
-
-        <section>
-          <h2>Much more</h2>
-          <ul>
-            <li>Right-to-left support</li>
-            <li>
-              <a href="https://github.com/hakimel/reveal.js#api"
-                >Extensive JavaScript API</a
-              >
-            </li>
-            <li>
-              <a href="https://github.com/hakimel/reveal.js#auto-sliding"
-                >Auto-progression</a
-              >
-            </li>
-            <li>
-              <a href="https://github.com/hakimel/reveal.js#parallax-background"
-                >Parallax backgrounds</a
-              >
-            </li>
-            <li>
-              <a href="https://github.com/hakimel/reveal.js#keyboard-bindings"
-                >Custom keyboard bindings</a
-              >
-            </li>
-          </ul>
-        </section>
-
-        <section style="text-align: left;">
-          <h1>THE END</h1>
-          <p>
-            - <a href="https://slides.com">Try the online editor</a> <br />
-            -
-            <a href="https://github.com/hakimel/reveal.js"
-              >Source code &amp; documentation</a
-            >
-          </p>
+          <h2>Kenrick</h2>
+          <a href="https://blog.kenrick95.org/">blog.kenrick95.org</a>
         </section>
       </div>
     </div>
