@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/reveal.css" />
     <link rel="stylesheet" href="css/theme/white.css" id="theme" />
+    <link rel="stylesheet" href="css/custom.css" />
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/monokai.css" />
@@ -177,7 +178,7 @@
               <tr>
                 <td>SPA</td>
 
-                <td>Client server</td>
+                <td>Client-server</td>
               </tr>
               <tr>
                 <td>User "uploads" BRSTM</td>
@@ -218,25 +219,91 @@
           <section>
             <h2>Audio Crash Course, part 1</h2>
           </section>
+
           <section>
-            <h2>Digital Audio</h2>
+            <h2>Analog to Digital</h2>
+            <aside class="notes">
+              Given audio wave, red line; how to represent it digitally?<br />
+              One way is to measure the wave amplitude on constant interval
+              (sampling)<br />
+              floating point measurement value to integer space (quantized)<br />
+              blue dots (sampled and quantized); bit depth is 4-bit (-8 to +7)
+            </aside>
+            <img
+              data-src="https://upload.wikimedia.org/wikipedia/commons/2/21/4-bit-linear-PCM.svg"
+            />
+            <div class="credit">
+              via
+              <a
+                href="https://commons.wikimedia.org/wiki/File:4-bit-linear-PCM.svg"
+                >Aquegg</a
+              >
+              (CC BY-SA 3.0)
+            </div>
+          </section>
+
+          <section>
+            <h2>Pulse-code modulation (PCM)</h2>
             <ul>
-              <li>Analog sound wave &rarr; samples</li>
-              <li>PCM: Pulse-code modulation</li>
-              <li>Compression</li>
-              <li>Codec: Coder-decoder</li>
-              <li>Channels</li>
+              <li>Analog sound wave</li>
+              <li>Sampling</li>
+              <li>Quantization</li>
+              <li>Bit depth</li>
             </ul>
           </section>
 
           <section>
-            <h2>Terminologies</h2>
+            <h2>Audio channels</h2>
+            <aside class="notes">
+              You heard about "mono" and "stereo audio", left and right. This
+              means that audio can be captured in more than one channel. Stereo
+              audio just means that it has two channels. Mono -> one channel.
+              <br />
+              How to represent that digitally? Simple, save the two waves
+              separately!<br />
+            </aside>
+            <img
+              data-src="https://upload.wikimedia.org/wikipedia/commons/6/68/Wave_sound_digital_representation_splitted_channels.JPG"
+            />
+            <div class="credit">
+              via
+              <a
+                href="https://commons.wikimedia.org/wiki/File:Wave_sound_digital_representation_splitted_channels.JPG"
+                >Fillbit</a
+              >
+              (CC BY-SA 4.0)
+            </div>
+          </section>
+
+          <section>
+            <h2>4-minute track from a CD 💿</h2>
             <ul>
-              <li>Format</li>
-              <li>Codec: Coder-decoder</li>
-              <li>Channels</li>
+              <li>Sample rate: 44100 per second</li>
+              <li>Channels: 2</li>
+              <li>Bit depth: 16 bits per channel</li>
+              <li>Length: 240 seconds</li>
+              <li>
+                44100 /s &times; 2 &times; 16 bits &times; 240 s<br />=
+                338,688,000‬ bits! ≈ <b>42.336 MB</b>
+              </li>
             </ul>
           </section>
+
+          <section>
+            <h2>
+              Why your 4-minute audio file does not take up 42 MB of space?
+            </h2>
+          </section>
+
+          <section>
+            {{expand section}}
+            <h2>Compression!</h2>
+            <ul>
+              <li>Codec: Coder-decoder</li>
+              <li>File Format: WAV, MP3, FLAC, ALAC</li>
+            </ul>
+          </section>
+
           <!-- https://docstore.mik.ua/orelly/web2/wdesign/ch24_01.htm -->
           <!-- https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Basic_concepts_behind_Web_Audio_API -->
 
@@ -648,7 +715,7 @@ Set/unset the current timestamp for play/pause/seek/etc
             the topic.
           </section>
           <section>
-            Don't be afraid to read others' codes. Codes never lie. 
+            Don't be afraid to read others' codes. Codes never lie.
           </section>
           <section>
             Web Audio API is difficult to use 😢
