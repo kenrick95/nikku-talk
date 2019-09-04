@@ -46,9 +46,8 @@
         </section>
 
         <section>
-          <h2>Hi there!</h2>
-          <h3>Kenrick</h3>
-          <p>Software Engineer, Shopee</p>
+          <h2>I'm Kenrick</h2>
+          <p>Engineer, Shopee</p>
         </section>
 
         <section>
@@ -217,7 +216,10 @@
 
         <section>
           <section>
-            <h2>Audio Crash Course, part 1</h2>
+            <h2>
+              &lt;crash-course&gt;
+            </h2>
+            <h4>in Digital Audio</h4>
           </section>
 
           <section>
@@ -293,15 +295,38 @@
             <h2>
               Why your 4-minute audio file does not take up 42 MB of space?
             </h2>
+            <h3 class="fragment">Because compression!</h3>
           </section>
 
           <section>
-            {{expand section}}
-            <h2>Compression!</h2>
+            <aside class="notes">
+              Some important concepts of compression:
+
+              <li>
+                Coding format: is how audio data is represented in the
+                compressed format
+              </li>
+              <li>
+                Codec: program that encode and decode a format into raw audio,
+                usually PCM treated as the raw uncompressed audio
+              </li>
+              <li>
+                Container format: the files that contains compressed audio, plus
+                metadata, such as title, artist, etc
+              </li>
+            </aside>
+            <h2>Compression</h2>
             <ul>
-              <li>Codec: Coder-decoder</li>
-              <li>File Format: WAV, MP3, FLAC, ALAC</li>
+              <li class="fragment">Coding format: MP3, AAC, FLAC</li>
+              <li class="fragment">Codec: encoder & decoder program</li>
+              <li class="fragment">Container format: .mp3, .m4a, .flac</li>
             </ul>
+          </section>
+
+          <section>
+            <h2>
+              &lt;/crash-course&gt;
+            </h2>
           </section>
 
           <!-- https://docstore.mik.ua/orelly/web2/wdesign/ch24_01.htm -->
@@ -317,22 +342,26 @@
           </section>
 
           <section>
-            Only two "wiki" pages describing the file!
+            Only found two "wiki" pages describing the file!
 
-            <ul>
-              <li>https://wiibrew.org/wiki/BRSTM_file</li>
-              <li>http://wiki.tockdom.com/wiki/BRSTM_(File_Format)</li>
+            <img data-src="images/wiki-screenshots.png" />
+
+            <ul class="inline-list">
+              <li><a href="https://wiibrew.org/wiki/BRSTM_file">WiiBrew</a></li>
+              <li>
+                <a href="http://wiki.tockdom.com/wiki/BRSTM_(File_Format)"
+                  >Custom Mario Kart Wii Wiki</a
+                >
+              </li>
             </ul>
           </section>
           <section>
-            <p>tl;dr:</p>
+            <h3>Overview</h3>
 
             <ul>
-              <li>Format: BRSTM</li>
-              <li>Codec: PCM or ADPCM</li>
-              <li># Channels: specified in file</li>
-              <li>Sections: HEAD, ADPC, DATA</li>
-              <li>ADPC, DATA: Interleaved, in "blocks"</li>
+              <li>Container Format: BRSTM</li>
+              <li>Coding Format: PCM or ADPCM</li>
+              <li>Other metdata specified in file</li>
             </ul>
           </section>
 
@@ -344,39 +373,11 @@
           </section>
 
           <section>
-            <p>Insert iframe or image?</p>
+            <p>Insert iframe or image? {{expand section}}</p>
           </section>
 
           <section>
             <p>It works. What's next?</p>
-          </section>
-        </section>
-        <section>
-          <section>
-            <h2>Decoding ADPCM</h2>
-          </section>
-          <section>
-            <p>This is the codec</p>
-            <i class="fragment">How to turn ADPCM into PCM?</i>
-          </section>
-
-          <section>
-            <h2>There should be a NPM package for this</h2>
-          </section>
-
-          <section>
-            <h2>
-              <a href="https://www.npmjs.com/package/imaadpcm">imaadpcm</a>
-              [insert npm screenshot]
-            </h2>
-          </section>
-
-          <section>
-            <h2>😱</h2>
-          </section>
-
-          <section>
-            <p>and the input/output looks as expected!</p>
           </section>
         </section>
 
@@ -400,24 +401,57 @@
             Insert illustration of Web Audio API:
 
             <!--
-            <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
-const audioContext = new AudioContext(); // Web Audio API
-const bufferSource = audioContext.createBufferSource(); // Web Audio API
-
-const pcm = imaadpcm.decode(adpcm, metadata.blockSize); // external library
-const normalizedPcm = normalize(pcm); // normalize [-32767..32768] (Int16) to [-1..1] (Float32)
-
-// Create a Audio Buffer, part of Web Audio API
-const audioBuffer = this.audioContext.createBuffer(1, normalizedPcm.length, metadata.sampleRate);
-// Set pcm data to audio buffer
-audioBuffer.getChannelData(0).set(normalizedPcm);
-
-// Connecting stuffs, and play it
-bufferSource.buffer = audioBuffer;
-bufferSource.connect(audioContext.destination);
-bufferSource.start(0);
-                        </code></pre> -->
+              <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+  const audioContext = new AudioContext(); // Web Audio API
+  const bufferSource = audioContext.createBufferSource(); // Web Audio API
+  
+  const pcm = imaadpcm.decode(adpcm, metadata.blockSize); // external library
+  const normalizedPcm = normalize(pcm); // normalize [-32767..32768] (Int16) to [-1..1] (Float32)
+  
+  // Create a Audio Buffer, part of Web Audio API
+  const audioBuffer = this.audioContext.createBuffer(1, normalizedPcm.length, metadata.sampleRate);
+  // Set pcm data to audio buffer
+  audioBuffer.getChannelData(0).set(normalizedPcm);
+  
+  // Connecting stuffs, and play it
+  bufferSource.buffer = audioBuffer;
+  bufferSource.connect(audioContext.destination);
+  bufferSource.start(0);
+                          </code></pre> -->
           </section>
+
+          <section>
+            Now it's time to connect those two together
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Decoding ADPCM</h2>
+          </section>
+          <section>
+            <p>This is the coding format</p>
+            <i class="fragment">How to turn ADPCM into PCM?</i>
+          </section>
+
+          <section>
+            <h2>There should be a NPM package for this</h2>
+          </section>
+
+          <section>
+            <img data-src="images/npm-imadpcm.png" />
+            <a href="https://www.npmjs.com/package/imaadpcm">imaadpcm</a>
+          </section>
+
+          <section>
+            <h2>😱</h2>
+          </section>
+
+          <section>
+            <img data-src="images/npm-imaadpcm-api.png" />
+            <p>and the input/output looks as expected!</p>
+          </section>
+
           <section>
             So how's it?
           </section>
@@ -447,8 +481,13 @@ bufferSource.start(0);
           </section>
 
           <section>
-            Insert screenshot of
-            <!-- https://wiki.multimedia.cx/index.php/Category:ADPCM_Audio_Codecs -->
+            <img data-src="images/adpcm-formats.png" />
+            <p class="credit">
+              <a
+                href="https://wiki.multimedia.cx/index.php/Category:ADPCM_Audio_Codecs"
+                >MultimediaWiki</a
+              >
+            </p>
           </section>
 
           <section>
