@@ -1,0 +1,83 @@
+body {
+    max-width: 40rem;
+    padding: 2rem;
+    margin: auto;
+  }
+  body,
+  p,
+  div,
+  tr,
+  summary,
+  details {
+    font-family: sans-serif;
+    line-height: 1.6;
+  }
+  #metadata-container {
+    display: none;
+  }
+  #metadata {
+    width: 100%;
+  }
+  .section + .section {
+    margin-top: 1.6rem;
+  }
+  .note {
+    font-size: 0.7rem;
+    text-decoration: underline dotted black;
+    font-style: italic;
+    cursor: help;
+  }
+  #form-and-details {
+    display: flex;
+  }
+  #form-and-details .column {
+    flex: 1 1 50%;
+  }
+  #form-and-details .column + .column {
+    margin-left: 0.6rem;
+  }
+  #controls-form {
+    position: relative;
+  }
+  #controls-time-display {
+    font-family: monospace;
+    font-size: 1rem;
+  }
+  #controls-volume-container {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    text-align: center;
+  }
+  #controls-volume {
+    width: 80px;
+    height: 2rem;
+    margin: 0;
+    transform-origin: 50% 50%;
+    transform: rotate(-90deg) translateX(-50%) translateX(1rem);
+  }
+  #controls-stream-select {
+    display: none;
+  }
+  #controls-stream-select > input {
+    margin: 2px;
+  }
+  #metadata-caption {
+    cursor: help;
+  }
+  #unsupported {
+    display: none;
+  }
+  #errors:empty {
+    visibility: hidden;
+  }
+  .error {
+    color: #ff4136;
+    border: 1px solid currentColor;
+    padding: 0.6rem;
+  }
+  input:disabled,
+  button:disabled {
+    cursor: not-allowed;
+  }
+  
