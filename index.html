@@ -408,30 +408,53 @@
             </aside>
           </section>
           <section>
-            Insert illustration of Web Audio API:
-
-            <!--
-              <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
-  const audioContext = new AudioContext(); // Web Audio API
-  const bufferSource = audioContext.createBufferSource(); // Web Audio API
-  
-  const pcm = imaadpcm.decode(adpcm, metadata.blockSize); // external library
-  const normalizedPcm = normalize(pcm); // normalize [-32767..32768] (Int16) to [-1..1] (Float32)
-  
-  // Create a Audio Buffer, part of Web Audio API
-  const audioBuffer = this.audioContext.createBuffer(1, normalizedPcm.length, metadata.sampleRate);
-  // Set pcm data to audio buffer
-  audioBuffer.getChannelData(0).set(normalizedPcm);
-  
-  // Connecting stuffs, and play it
-  bufferSource.buffer = audioBuffer;
-  bufferSource.connect(audioContext.destination);
-  bufferSource.start(0);
-                          </code></pre> -->
+            <img
+              data-src="https://www.w3.org/TR/webaudio/images/modular-routing1.png"
+            />
+            <p class="credit">
+              <a href="https://www.w3.org/TR/webaudio/"
+                >W3C - Web Audio API specs</a
+              >
+            </p>
           </section>
 
           <section>
-            Now it's time to connect those two together
+            <p>Audio Context + source &rarr; destination</p>
+            <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+                const audioContext = new AudioContext();
+                const bufferSource = audioContext.createBufferSource();     
+                bufferSource.connect(audioContext.destination);
+            </code></pre>
+          </section>
+
+          <section>
+            <p>Decode ADPCM</p>
+            <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              const pcm = decode(adpcm); // TODO: Implement "decode" function
+            </code></pre>
+          </section>
+
+          <section>
+            <p>Transform PCM into audio buffer</p>
+            <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              const audioBuffer = this.audioContext.createBuffer(
+                1,
+                pcm.length,
+                metadata.sampleRate
+              );
+              audioBuffer.getChannelData(0).set(pcm);
+            </code></pre>
+          </section>
+          <section>
+              <p>Write into source, and plays it</p>
+            <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              bufferSource.buffer = audioBuffer;
+              bufferSource.start(0);
+            </code></pre>
+          </section>
+
+          <section>
+            What's left to do?
           </section>
         </section>
 
