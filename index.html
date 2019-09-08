@@ -446,7 +446,7 @@
             </code></pre>
           </section>
           <section>
-              <p>Write into source, and plays it</p>
+            <p>Write into source, and plays it</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
               bufferSource.buffer = audioBuffer;
               bufferSource.start(0);
@@ -545,7 +545,7 @@
         <section>
           <section>
             <h2>How did they do it?</h2>
-            <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a> (C)
+            <a href="https://github.com/FFmpeg/FFmpeg">ffmpeg</a>
           </section>
           <section>
             <a
@@ -573,7 +573,6 @@
           <section>
             <h2>How did they do it?</h2>
             <a href="https://github.com/libertyernie/brawltools">BrawlBox</a>
-            (C#)
           </section>
 
           <section>
@@ -657,6 +656,17 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
 
           <section>
             Insert iframe to that "state" demo
+            <iframe
+              class="iframe"
+              data-src="demos/eureka/index.html"
+              width="640"
+              height="360"
+              frameborder="0"
+              marginwidth="0"
+              marginheight="0"
+              scrolling="yes"
+              allowfullscreen
+            ></iframe>
           </section>
         </section>
 
@@ -671,6 +681,10 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
 
           <section>
             Audio Player is far from finished
+
+            <aside class="notes">
+              Can play audio but still need lots of work to do to be a real audio player
+            </aside>
           </section>
         </section>
 
@@ -691,6 +705,13 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           </section>
           <section>
             <h3>Looping</h3>
+            <p class="fragment">Easy</p>
+            
+            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              audioBuffer.loop = true
+              audioBuffer.loopStart = … // in seconds
+              audioBuffer.loopEnd = … // in seconds
+            </code></pre>
             <!--
               Easy
 Buffer.loop = true
@@ -699,11 +720,14 @@ Buffer.loopEnd = … // in SECONDS!?
 Comment
 Bizarre. Usually devs will like to avoid floating point numbers, but Web Audio API seems to love using floating points.
 
-
             -->
+            <aside class="notes">
+              Bizarre choice of using "seconds" instead of "sample index" like most of other audio APIs. Usually devs will like to avoid floating point numbers, but Web Audio API seems to love using floating points.
+            </aside>
           </section>
           <section>
             <h3>Play/pause</h3>
+            <p class="fragment">Easy</p>
             <!--
               Easy now
 These methods have been added to the standard and are widely available
@@ -711,10 +735,18 @@ audioContext.resume
 audioContext.suspend
 
             -->
+            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              audioContext.suspend(); // pause
+              audioContext.resume(); // resume
+            </code></pre>
+            <aside class="notes">
+              These methods have been added to the standard and are widely available
+            </aside>
           </section>
 
           <section>
             <h3>Seek</h3>
+            <p class="fragment">Medium</p>
             <!--
               Difficulty: Medium
 In ideal world (<audio>), it is easy
@@ -724,9 +756,21 @@ Need to stop the audio buffer, reinitialize buffer, then start playback at the s
 
 
             -->
+            {{expand section}}
+            <!-- // TODO: Insert image of UI? -->
+            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              audioElement.time = … // in seconds
+            </code></pre>
+            <!-- // TODO: Illustrate that this code is not Web Audio API -->
+            <aside class="notes">
+              In Web Audio API, it’s kinda hard
+              Need to stop the audio buffer, reinitialize buffer, then start playback at the sought time
+
+            </aside>
           </section>
           <section>
             <h3>Playback time display</h3>
+            <p class="fragment">Impossible</p>
             <!-- 
               How to display current playback time?
 If no loop, it’s easy
@@ -738,18 +782,42 @@ My workaround: Don’t rely on their timer, it’s less accurate, but more contr
 Set/unset the current timestamp for play/pause/seek/etc
 
             -->
+            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              audioContext.currentTime
+            </code></pre>
+            <!-- // TODO: Illustrate the linearity of audio context vs looping at buffer -->
+            <aside class="notes">
+              If I have loop, it’s impossible
+That current time will keep increase even after loop
+Proposal to add “playback time” to the standard
+My workaround: Don’t rely on their timer, it’s less accurate, but more control in my side.
+Set/unset the current timestamp for play/pause/seek/etc
+            </aside>
           </section>
         </section>
 
         <section>
           <section>
-            Final product demo
+            <h2>Finally</h2>
+          </section>
+          <section>
+            <iframe
+              class="iframe"
+              data-src="demos/final/index.html"
+              width="640"
+              height="360"
+              frameborder="0"
+              marginwidth="0"
+              marginheight="0"
+              scrolling="yes"
+              allowfullscreen
+            ></iframe>
           </section>
         </section>
 
         <section>
           <section>
-            Marketing
+            <h2>Marketing</h2>
           </section>
           <section>
             Posted to
@@ -761,22 +829,22 @@ Set/unset the current timestamp for play/pause/seek/etc
             <a href="https://forums.kc-mm.com/index.php?topic=80370.0"
               >a Nintendo modding forum</a
             >.
-          </section>
-          <section>
-            Reception?
-          </section>
-          <section>
-            Received bug reports, I didn't handle few edge cases. They are kind
-            enough to provide the files to reproduce the bug. 1. BRSTM can
-            contain raw PCMs too (I only handled if they contained ADPCM). 2.
-            BRSTM can have more than one "stream" (pair of channels). So amazed.
-            BrawlBox actually handled this.
+            {{expand section}}
+            TODO: Insert screenshot
+
+            <aside  class="notes">
+              Received bug reports, I didn't handle few edge cases. They are kind
+              enough to provide the files to reproduce the bug. 1. BRSTM can
+              contain raw PCMs too (I only handled if they contained ADPCM). 2.
+              BRSTM can have more than one "stream" (pair of channels). So amazed.
+              BrawlBox actually handled this.
+            </aside>
           </section>
         </section>
 
         <section>
           <section>
-            Lessons
+            <h2>Lessons</h2>
           </section>
 
           <section>
@@ -790,7 +858,7 @@ Set/unset the current timestamp for play/pause/seek/etc
             Don't be afraid to read others' codes. Codes never lie.
           </section>
           <section>
-            Web Audio API is difficult to use 😢
+            Web Audio API is kinda difficult to use 😢
           </section>
         </section>
 
@@ -829,19 +897,19 @@ Set/unset the current timestamp for play/pause/seek/etc
             src: 'plugin/markdown/marked.js',
             condition: function() {
               return !!document.querySelector('[data-markdown]');
-            }
+            },
           },
           {
             src: 'plugin/markdown/markdown.js',
             condition: function() {
               return !!document.querySelector('[data-markdown]');
-            }
+            },
           },
           { src: 'plugin/highlight/highlight.js', async: true },
           { src: 'plugin/search/search.js', async: true },
           { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true }
-        ]
+          { src: 'plugin/notes/notes.js', async: true },
+        ],
       });
     </script>
     <script
