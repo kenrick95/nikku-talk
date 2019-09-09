@@ -489,7 +489,7 @@
             So how's it?
           </section>
           <section>
-            Insert image to my commit
+            <img data-src="images/noise.png" />
           </section>
         </section>
 
@@ -576,10 +576,7 @@
           </section>
 
           <section>
-            Insert BrawlBox screenshot (overview)
-          </section>
-          <section>
-            Insert BrawlBox screenshot (playing)
+            <img data-src="images/bb.png" width="600" />
           </section>
 
           <!-- 
@@ -634,16 +631,12 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           </section>
 
           <section>
-            Insert screenshots of debugging
+            <img data-src="images/debug.png" />
 
             <aside class="notes">
               and so I thought, between this point and this point, these codes
               are running, so I should replicate those codes in JS.
             </aside>
-          </section>
-
-          <section>
-            Insert screenshot
           </section>
         </section>
 
@@ -651,11 +644,13 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           <section>
             <h2>Eureka!</h2>
 
+            
+            <img data-src="images/eureka.png" />
+
             <!-- https://github.com/kenrick95/nikku/blob/f98814df754b6e70109074c2a944516a26ea6c2e/src/brstm.js -->
           </section>
 
           <section>
-            Insert iframe to that "state" demo
             <iframe
               class="iframe"
               data-src="demos/eureka/index.html"
@@ -683,7 +678,8 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
             Audio Player is far from finished
 
             <aside class="notes">
-              Can play audio but still need lots of work to do to be a real audio player
+              Can play audio but still need lots of work to do to be a real
+              audio player
             </aside>
           </section>
         </section>
@@ -706,8 +702,10 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           <section>
             <h3>Looping</h3>
             <p class="fragment">Easy</p>
-            
-            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+
+            <pre
+              class="fragment"
+            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioBuffer.loop = true
               audioBuffer.loopStart = … // in seconds
               audioBuffer.loopEnd = … // in seconds
@@ -722,7 +720,10 @@ Bizarre. Usually devs will like to avoid floating point numbers, but Web Audio A
 
             -->
             <aside class="notes">
-              Bizarre choice of using "seconds" instead of "sample index" like most of other audio APIs. Usually devs will like to avoid floating point numbers, but Web Audio API seems to love using floating points.
+              Bizarre choice of using "seconds" instead of "sample index" like
+              most of other audio APIs. Usually devs will like to avoid floating
+              point numbers, but Web Audio API seems to love using floating
+              points.
             </aside>
           </section>
           <section>
@@ -735,12 +736,15 @@ audioContext.resume
 audioContext.suspend
 
             -->
-            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            <pre
+              class="fragment"
+            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioContext.suspend(); // pause
               audioContext.resume(); // resume
             </code></pre>
             <aside class="notes">
-              These methods have been added to the standard and are widely available
+              These methods have been added to the standard and are widely
+              available
             </aside>
           </section>
 
@@ -758,14 +762,15 @@ Need to stop the audio buffer, reinitialize buffer, then start playback at the s
             -->
             {{expand section}}
             <!-- // TODO: Insert image of UI? -->
-            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            <pre
+              class="fragment"
+            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioElement.time = … // in seconds
             </code></pre>
             <!-- // TODO: Illustrate that this code is not Web Audio API -->
             <aside class="notes">
-              In Web Audio API, it’s kinda hard
-              Need to stop the audio buffer, reinitialize buffer, then start playback at the sought time
-
+              In Web Audio API, it’s kinda hard Need to stop the audio buffer,
+              reinitialize buffer, then start playback at the sought time
             </aside>
           </section>
           <section>
@@ -782,16 +787,18 @@ My workaround: Don’t rely on their timer, it’s less accurate, but more contr
 Set/unset the current timestamp for play/pause/seek/etc
 
             -->
-            <pre class="fragment"><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            <pre
+              class="fragment"
+            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioContext.currentTime
             </code></pre>
             <!-- // TODO: Illustrate the linearity of audio context vs looping at buffer -->
             <aside class="notes">
-              If I have loop, it’s impossible
-That current time will keep increase even after loop
-Proposal to add “playback time” to the standard
-My workaround: Don’t rely on their timer, it’s less accurate, but more control in my side.
-Set/unset the current timestamp for play/pause/seek/etc
+              If I have loop, it’s impossible That current time will keep
+              increase even after loop Proposal to add “playback time” to the
+              standard My workaround: Don’t rely on their timer, it’s less
+              accurate, but more control in my side. Set/unset the current
+              timestamp for play/pause/seek/etc
             </aside>
           </section>
         </section>
@@ -805,7 +812,7 @@ Set/unset the current timestamp for play/pause/seek/etc
               class="iframe"
               data-src="demos/final/index.html"
               width="640"
-              height="360"
+              height="500"
               frameborder="0"
               marginwidth="0"
               marginheight="0"
@@ -820,24 +827,26 @@ Set/unset the current timestamp for play/pause/seek/etc
             <h2>Marketing</h2>
           </section>
           <section>
-            Posted to
-            <a
-              href="https://www.reddit.com/r/BRSTM/comments/bky6p0/i_created_a_webbased_brstm_player/"
-              >r/BRSTM</a
-            >
-            and
-            <a href="https://forums.kc-mm.com/index.php?topic=80370.0"
-              >a Nintendo modding forum</a
-            >.
-            {{expand section}}
-            TODO: Insert screenshot
+            <img data-src="images/mkt.png" />
 
-            <aside  class="notes">
-              Received bug reports, I didn't handle few edge cases. They are kind
-              enough to provide the files to reproduce the bug. 1. BRSTM can
-              contain raw PCMs too (I only handled if they contained ADPCM). 2.
-              BRSTM can have more than one "stream" (pair of channels). So amazed.
-              BrawlBox actually handled this.
+            <div class="credit">
+              Posted to
+              <a
+                href="https://www.reddit.com/r/BRSTM/comments/bky6p0/i_created_a_webbased_brstm_player/"
+                >r/BRSTM</a
+              >
+              and
+              <a href="https://forums.kc-mm.com/index.php?topic=80370.0"
+                >a Nintendo modding forum</a
+              >.
+            </div>
+
+            <aside class="notes">
+              Received bug reports, I didn't handle few edge cases. They are
+              kind enough to provide the files to reproduce the bug. 1. BRSTM
+              can contain raw PCMs too (I only handled if they contained ADPCM).
+              2. BRSTM can have more than one "stream" (pair of channels). So
+              amazed. BrawlBox actually handled this.
             </aside>
           </section>
         </section>
@@ -897,19 +906,19 @@ Set/unset the current timestamp for play/pause/seek/etc
             src: 'plugin/markdown/marked.js',
             condition: function() {
               return !!document.querySelector('[data-markdown]');
-            },
+            }
           },
           {
             src: 'plugin/markdown/markdown.js',
             condition: function() {
               return !!document.querySelector('[data-markdown]');
-            },
+            }
           },
           { src: 'plugin/highlight/highlight.js', async: true },
           { src: 'plugin/search/search.js', async: true },
           { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true },
-        ],
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
       });
     </script>
     <script

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Nikku - Web-based BRSTM player</title>
+    <link rel="stylesheet" href="../shared/main.css" />
+  </head>
+
+  <body>
+    <header id="header">
+      <h1>Nikku</h1>
+
+      <p>
+        Web-based BRSTM player
+      </p>
+    </header>
+    <main id="main">
+      <div class="section error" id="unsupported">
+        Sorry, this browser is unsupported
+      </div>
+      <div class="section">
+        <label for="file">
+          Select a BRSTM file:
+        </label>
+        <input type="file" id="file" accept=".brstm" disabled />
+      </div>
+
+      <div class="section" id="form-and-details">
+        <div class="column">
+          <form class="section" id="controls-form" action="#">
+            <fieldset>
+              <legend>Controls</legend>
+              <div id="controls-time-container">
+                <input
+                  type="range"
+                  id="controls-time"
+                  min="0"
+                  max="100"
+                  value="0"
+                  step="0.1"
+                  disabled
+                />
+                <div id="controls-time-display">
+                  <span id="controls-time-current">
+                    00:00.00
+                  </span>
+                  /
+                  <span id="controls-time-amount">
+                    00:00.00
+                  </span>
+                </div>
+                <small
+                  class="note"
+                  title="These controls could be buggy, if you find bug(s), please report it at the GitHub repo. Thanks!"
+                >
+                  note
+                </small>
+              </div>
+
+              <button id="controls-play" disabled>Play</button>
+              <button id="controls-pause" disabled>Pause</button>
+
+              <label id="controls-volume-container">
+                Volume<br />
+                <input
+                  type="range"
+                  id="controls-volume"
+                  disabled
+                  value="1"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                />
+              </label>
+              <label id="controls-loop-container">
+                <input type="checkbox" id="controls-loop" disabled checked />
+                Loop
+              </label>
+              <div id="controls-stream-select"></div>
+            </fieldset>
+          </form>
+
+          <div class="section error" id="errors"></div>
+
+          <a class="section" href="https://github.com/kenrick95/nikku"
+            >GitHub repository</a
+          >
+        </div>
+        <div class="column">
+          <details class="section" id="metadata-container">
+            <summary
+              id="metadata-caption"
+              title="Click to expand/collapse file metadata details"
+              >File metadata</summary
+            >
+            <table id="metadata">
+              <tbody id="metadata-body"></tbody>
+            </table>
+          </details>
+        </div>
+      </div>
+    </main>
+    <template id="metadata-row">
+      <tr>
+        <td class="metadata-row-key"></td>
+        <td class="metadata-row-value"></td>
+      </tr>
+    </template>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
