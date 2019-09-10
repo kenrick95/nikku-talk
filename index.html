@@ -63,6 +63,9 @@
           <section>
             <h2>BRSTM</h2>
           </section>
+          <section><img data-src="images/smash.png" /></section>
+
+          <section><img data-src="images/smash-kh.png" /></section>
           <section>
             <h2>BRSTM</h2>
             <ul>
@@ -120,8 +123,8 @@
 
             <ul>
               <li>
-                Server serves the current audio chunk (to support loop) [explain
-                more]
+                <!-- // TODO: Illustrate the idea; gramophone? -->
+                Server serves the "current" audio chunk continuously
               </li>
               <li>
                 Client listens like listening online radio
@@ -416,13 +419,20 @@
                 >W3C - Web Audio API specs</a
               >
             </p>
+            <aside class="notes">
+              W3C Illustrates is clearly. In Web Audio API, the whole thing is
+              created using Audio Context. The "end" goal is to connect a source
+              or multiple sources into the "Destination" node of the audio
+              context. In our use case, We create a Audio Buffer Source node that is connected to
+              the destination node.
+            </aside>
           </section>
 
           <section>
-            <p>Audio Context + source &rarr; destination</p>
+            <p>Buffer Source node &rarr; Audio Context destination node</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
                 const audioContext = new AudioContext();
-                const bufferSource = audioContext.createBufferSource();     
+                const bufferSource = audioContext.createBufferSource();
                 bufferSource.connect(audioContext.destination);
             </code></pre>
           </section>
@@ -644,7 +654,6 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           <section>
             <h2>Eureka!</h2>
 
-            
             <img data-src="images/eureka.png" />
 
             <!-- https://github.com/kenrick95/nikku/blob/f98814df754b6e70109074c2a944516a26ea6c2e/src/brstm.js -->
@@ -671,24 +680,19 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           </section>
 
           <section>
-            No
-          </section>
-
-          <section>
-            Audio Player is far from finished
+            <img data-src="images/winamp.png" />
 
             <aside class="notes">
-              Can play audio but still need lots of work to do to be a real
-              audio player
+              Audio Player is far from finished. This is what a full audio
+              player looks like. Our audio player is nowhere near that.
             </aside>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>Nuances</h2>
-
-            <p>Web Audio API is hard</p>
+            <h2>Web Audio API</h2>
+            <p>Gotchas</p>
           </section>
           <section>
             <h3>Audio Player</h3>
@@ -705,40 +709,27 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
 
             <pre
               class="fragment"
-            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            ><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              // audioBuffer contains raw audio data (PCM)
               audioBuffer.loop = true
               audioBuffer.loopStart = … // in seconds
               audioBuffer.loopEnd = … // in seconds
             </code></pre>
-            <!--
-              Easy
-Buffer.loop = true
-Buffer.loopStart = … // in SECONDS!?
-Buffer.loopEnd = … // in SECONDS!?
-Comment
-Bizarre. Usually devs will like to avoid floating point numbers, but Web Audio API seems to love using floating points.
-
-            -->
             <aside class="notes">
-              Bizarre choice of using "seconds" instead of "sample index" like
-              most of other audio APIs. Usually devs will like to avoid floating
-              point numbers, but Web Audio API seems to love using floating
-              points.
+              If you remember back in the slides, I mentioned about "audio
+              buffer" in Web Audio API, that thing has a loop flag, with loop
+              start and loop end in seconds. Bizarre choice of using "seconds"
+              instead of "sample index" like most of other audio APIs. Usually
+              devs will like to avoid floating point numbers, but Web Audio API
+              seems to love using floating points.
             </aside>
           </section>
           <section>
             <h3>Play/pause</h3>
             <p class="fragment">Easy</p>
-            <!--
-              Easy now
-These methods have been added to the standard and are widely available
-audioContext.resume
-audioContext.suspend
-
-            -->
             <pre
               class="fragment"
-            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            ><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioContext.suspend(); // pause
               audioContext.resume(); // resume
             </code></pre>
@@ -750,7 +741,7 @@ audioContext.suspend
 
           <section>
             <h3>Seek</h3>
-            <p class="fragment">Medium</p>
+            <img data-src="images/winamp-seek.png" />
             <!--
               Difficulty: Medium
 In ideal world (<audio>), it is easy
@@ -760,19 +751,37 @@ Need to stop the audio buffer, reinitialize buffer, then start playback at the s
 
 
             -->
-            {{expand section}}
-            <!-- // TODO: Insert image of UI? -->
             <pre
               class="fragment"
-            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            ><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+              // in &lt;audio /&gt;
               audioElement.time = … // in seconds
             </code></pre>
-            <!-- // TODO: Illustrate that this code is not Web Audio API -->
             <aside class="notes">
-              In Web Audio API, it’s kinda hard Need to stop the audio buffer,
-              reinitialize buffer, then start playback at the sought time
+              In Web Audio API, it’s kinda hard
             </aside>
           </section>
+          <section>
+            <h3>Seek (in Web Audio)</h3>
+            <ul>
+              <li class="fragment">Destroy audio buffer</li>
+              <li class="fragment">
+                Recreate the whole audio node connect thing
+              </li>
+              <li class="fragment">
+                Start playing at certain time
+                <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
+                    bufferSource.start(0, soughtTimeInSeconds);
+                  </code></pre>
+              </li>
+            </ul>
+
+            <aside class="notes">
+              Need to stop the audio buffer, reinitialize everything, then start
+              playback at the sought time
+            </aside>
+          </section>
+
           <section>
             <h3>Playback time display</h3>
             <p class="fragment">Impossible</p>
@@ -789,16 +798,19 @@ Set/unset the current timestamp for play/pause/seek/etc
             -->
             <pre
               class="fragment"
-            ><code class="javascript" dta-trim contenteditable style="font-size: 18px;" spellcheck="false">
+            ><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioContext.currentTime
             </code></pre>
-            <!-- // TODO: Illustrate the linearity of audio context vs looping at buffer -->
+            
+            <img data-src="images/nikku-time-chart.png" class="fragment" /> <!-- TODO: Improve chart -->
+
             <aside class="notes">
-              If I have loop, it’s impossible That current time will keep
-              increase even after loop Proposal to add “playback time” to the
-              standard My workaround: Don’t rely on their timer, it’s less
-              accurate, but more control in my side. Set/unset the current
-              timestamp for play/pause/seek/etc
+              "currentTime" is a property of audio context. "bufferSource" node
+              is the one having loop. If I have loop, it’s impossible That
+              current time will keep increase even after loop Proposal to add
+              “playback time” to the standard My workaround: Don’t rely on their
+              timer, it’s less accurate, but more control in my side. Set/unset
+              the current timestamp for play/pause/seek/etc
             </aside>
           </section>
         </section>
