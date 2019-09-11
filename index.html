@@ -46,8 +46,7 @@
         </section>
 
         <section>
-          <h2>I'm Kenrick</h2>
-          <p>Engineer, Shopee</p>
+          <img data-src="images/hi.png" class="noborder" />
         </section>
 
         <section>
@@ -123,8 +122,7 @@
 
             <ul>
               <li>
-                <!-- // TODO: Illustrate the idea; gramophone? -->
-                Server serves the "current" audio chunk continuously
+                Server serves the latest audio chunk continuously
               </li>
               <li>
                 Client listens like listening online radio
@@ -423,8 +421,8 @@
               W3C Illustrates is clearly. In Web Audio API, the whole thing is
               created using Audio Context. The "end" goal is to connect a source
               or multiple sources into the "Destination" node of the audio
-              context. In our use case, We create a Audio Buffer Source node that is connected to
-              the destination node.
+              context. In our use case, We create a Audio Buffer Source node
+              that is connected to the destination node.
             </aside>
           </section>
 
@@ -438,9 +436,9 @@
           </section>
 
           <section>
-            <p>Decode ADPCM</p>
+            <p>Get PCM samples from BRSTM</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
-              const pcm = decode(adpcm); // TODO: Implement "decode" function
+              const pcm = brstm.getAllSamples(); // TODO: Implement
             </code></pre>
           </section>
 
@@ -801,16 +799,35 @@ Set/unset the current timestamp for play/pause/seek/etc
             ><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
               audioContext.currentTime
             </code></pre>
-            
-            <img data-src="images/nikku-time-chart.png" class="fragment" /> <!-- TODO: Improve chart -->
+
+            <img data-src="images/nikku-time-chart.png" class="fragment" />
+            <!-- TODO: Improve chart -->
 
             <aside class="notes">
               "currentTime" is a property of audio context. "bufferSource" node
               is the one having loop. If I have loop, it’s impossible That
-              current time will keep increase even after loop Proposal to add
-              “playback time” to the standard My workaround: Don’t rely on their
-              timer, it’s less accurate, but more control in my side. Set/unset
-              the current timestamp for play/pause/seek/etc
+              current time will keep increase even after loop
+            </aside>
+          </section>
+
+          <section>
+            <h3>Playback time display (workaround)</h3>
+
+            <p>Reimplement timer</p>
+
+            <ul>
+              <li class="fragment">
+                Less accurate
+              </li>
+              <li class="fragment">
+                But I do have all the controls
+              </li>
+            </ul>
+
+            <aside class="notes">
+              My workaround: Don’t rely on their timer, it’s less accurate, but
+              more control in my side. Set/unset the current timestamp for
+              play/pause/seek/etc
             </aside>
           </section>
         </section>
