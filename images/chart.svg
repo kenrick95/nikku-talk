@@ -1,0 +1,361 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  class="line-chart"
+  style="stroke-width: 3px; font-family: 'xkcd Script';"
+  width="814"
+  height="341"
+>
+  <!-- Generated using chart.xkcd, then manually editing the generated SVG 
+       https://codepen.io/kenrick95/pen/XWrBeer?editors=1100 -->
+  <defs>
+    <style type="text/css">
+@font-face {
+  font-family: "xkcd Script";
+  src: url("../../lib/font/xkcd-script/xkcd-script.eot"); /* IE9 Compat Modes */
+  src: url("../../lib/font/xkcd-script/xkcd-script.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("../../lib/font/xkcd-script/xkcd-script.otf") format("opentype"), /* Open Type Font */
+    url("../../lib/font/xkcd-script/xkcd-script.svg") format("svg"), /* Legacy iOS */
+    url("../../lib/font/xkcd-script/xkcd-script.ttf") format("truetype"), /* Safari, Android, iOS */
+    url("../../lib/font/xkcd-script/xkcd-script.woff") format("woff"), /* Modern Browsers */
+    url("../../lib/font/xkcd-script/xkcd-script.woff2") format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+    </style>
+  </defs>
+  <g transform="translate(70,60)">
+    <g pointer-events="all">
+      <g
+        transform="translate(0,231)"
+        fill="none"
+        font-size="10"
+        text-anchor="middle"
+      >
+        <path
+          class="domain"
+          stroke="currentColor"
+          d="M0.5,0.5H714.5"
+          filter="url(#xkcdify)"
+          style="stroke: black;"
+        ></path>
+        <g class="tick" opacity="1" transform="translate(0.5,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            0
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(79.83333333333333,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            5
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(159.16666666666666,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            10
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(238.5,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            15
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(317.8333333333333,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            20
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(397.16666666666663,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            25
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(476.5,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            30
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(555.8333333333333,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            35
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(635.1666666666666,0)">
+          <line stroke="currentColor" y2="0"></line>
+          <text
+            fill="currentColor"
+            y="6"
+            dy="0.71em">
+            40
+          </text>
+        </g>
+      </g>
+      <g fill="none" font-size="10" text-anchor="end">
+        <path
+          class="domain"
+          stroke="currentColor"
+          d="M-1,231.5H0.5V0.5H-1"
+          filter="url(#xkcdify)"
+          style="stroke: black;"
+        ></path>
+        <g class="tick" opacity="1" transform="translate(0,231.5)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            0
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,205.83333333333334)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            5
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,180.16666666666669)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            10
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,154.5)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            15
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,128.83333333333334)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            20
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,103.16666666666666)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            25
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,77.5)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            30
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,51.83333333333334)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            35
+          </text>
+        </g>
+        <g class="tick" opacity="1" transform="translate(0,26.166666666666686)">
+          <line stroke="currentColor" x2="-1"></line>
+          <text
+            fill="currentColor"
+            x="-11"
+            dy="0.32em">
+            40
+          </text>
+        </g>
+      </g>
+      <path
+        class="xkcd-chart-line"
+        d="M0,231C26.444444444444443,222.44444444444446,52.888888888888886,213.88888888888889,79.33333333333333,205.33333333333334C105.77777777777777,196.7777777777778,132.22222222222223,188.22222222222223,158.66666666666666,179.66666666666669C185.11111111111111,171.11111111111114,211.55555555555554,162.55555555555557,238,154C264.44444444444446,145.44444444444446,290.88888888888886,136.8888888888889,317.3333333333333,128.33333333333334C343.77777777777777,119.77777777777779,370.2222222222222,111.22222222222221,396.66666666666663,102.66666666666666C423.1111111111111,94.1111111111111,449.55555555555554,85.55555555555556,476,77C502.4444444444444,68.44444444444446,528.8888888888888,59.888888888888886,555.3333333333333,51.33333333333334C581.7777777777777,42.777777777777786,608.2222222222222,34.22222222222224,634.6666666666666,25.666666666666686"
+        fill="none"
+        stroke="#dd4528"
+        filter="url(#xkcdify)"
+      ></path>
+      <path
+        class="xkcd-chart-line"
+        d="M0,231C26.444444444444443,222.44444444444446,52.888888888888886,213.88888888888889,79.33333333333333,205.33333333333334C105.77777777777777,196.7777777777778,132.22222222222223,188.22222222222223,158.66666666666666,179.66666666666669C185.11111111111111,171.11111111111114,211.55555555555554,162.55555555555557,238,154C264.44444444444446,145.44444444444446,290.88888888888886,136.88888888888889,317.3333333333333,128.33333333333334"
+        fill="none"
+        stroke="#28a3dd"
+        filter="url(#xkcdify)"
+      ></path>
+      
+      <path
+        class="xkcd-chart-line"
+        d="M317.77777777777777,179.66666666666669L317.77777777777777,128.33333333333334"
+        fill="none"
+        stroke="#28a3dd"
+        filter="url(#xkcdify)"
+      ></path>
+
+      <path
+        class="xkcd-chart-line"
+        d="M317.77777777777777,179.66666666666669
+        C317.77777777777777,179.66666666666669,370.2222222222222,162.55555555555554,396.66666666666663,154
+        C423.1111111111111,145.44444444444443,449.55555555555554,136.88888888888889,476,128.33333333333334"
+        fill="none"
+        stroke="#28a3dd"
+        filter="url(#xkcdify)"
+      ></path>
+      
+      <path
+        class="xkcd-chart-line"
+        d="M476,179.66666666666669L476,128.33333333333334"
+        fill="none"
+        stroke="#28a3dd"
+        filter="url(#xkcdify)"
+      ></path>
+
+
+      <path
+        class="xkcd-chart-line"
+        d="M476.4444444444444,179.66666666666669
+        C476.4444444444444,179.66666666666669,528.8888888888888,162.55555555555554,555.3333333333333,154
+        C581.7777777777777,145.44444444444443,608.2222222222222,136.88888888888889,634.6666666666666,128.33333333333334"
+        fill="none"
+        stroke="#28a3dd"
+        filter="url(#xkcdify)"
+      ></path>
+      <svg x="0" y="0" name="legend">
+        <rect
+          style="fill: white;"
+          fill-opacity="0.85"
+          stroke="black"
+          stroke-width="2"
+          rx="5"
+          ry="5"
+          filter="url(#xkcdify)"
+          width="142.5"
+          height="50"
+          x="8"
+          y="5"
+        ></rect>
+        <g>
+          <rect
+            style="fill: rgb(221, 69, 40);"
+            width="8"
+            height="8"
+            rx="2"
+            ry="2"
+            filter="url(#xkcdify)"
+            x="15"
+            y="17"
+          ></rect>
+          <text x="27" y="25">
+            Current time
+          </text>
+        </g>
+        <g>
+          <rect
+            style="fill: rgb(40, 163, 221);"
+            width="8"
+            height="8"
+            rx="2"
+            ry="2"
+            filter="url(#xkcdify)"
+            x="15"
+            y="37"
+          ></rect>
+          <text x="27" y="45">
+            Expected time
+          </text>
+        </g>
+      </svg>
+    </g>
+  </g>
+  <filter
+    id="xkcdify"
+    filterUnits="userSpaceOnUse"
+    x="-5"
+    y="-5"
+    width="100%"
+    height="100%"
+  >
+    <feTurbulence
+      type="fractalNoise"
+      baseFrequency="0.05"
+      result="noise"
+    ></feTurbulence>
+    <feDisplacementMap
+      scale="5"
+      xChannelSelector="R"
+      yChannelSelector="G"
+      in="SourceGraphic"
+      in2="noise"
+    ></feDisplacementMap>
+  </filter>
+  <filter id="xkcdify-pie">
+    <feTurbulence
+      type="fractalNoise"
+      baseFrequency="0.05"
+      result="noise"
+    ></feTurbulence>
+    <feDisplacementMap
+      scale="5"
+      xChannelSelector="R"
+      yChannelSelector="G"
+      in="SourceGraphic"
+      in2="noise"
+    ></feDisplacementMap>
+  </filter>
+  <text style="font-weight: bold;" x="50%" y="30" text-anchor="middle">
+    Time over time
+  </text>
+  <text x="50%" y="331" text-anchor="middle">
+    Actual time
+  </text>
+  <text
+    text-anchor="end"
+    dy=".75em"
+    transform="rotate(-90)"
+    y="6"
+    x="-132.3666648864746"
+  >
+    Actual time
+  </text>
+</svg>
