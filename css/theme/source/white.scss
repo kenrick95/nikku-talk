@@ -13,6 +13,7 @@
 
 // Include theme-specific fonts
 @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../../lib/font/xkcd-script/xkcd-script.css);
 
 
 // Override theme settings (see ../template/settings.scss)
@@ -22,8 +23,8 @@ $mainColor: #222;
 $headingColor: #222;
 
 $mainFontSize: 42px;
-$mainFont: 'Source Sans Pro', Helvetica, sans-serif;
-$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
+$mainFont: 'xkcd Script', 'Source Sans Pro', Helvetica, sans-serif;
+$headingFont: 'xkcd Script', 'Source Sans Pro', Helvetica, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
