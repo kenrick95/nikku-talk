@@ -60,11 +60,34 @@
 
         <section>
           <section>
-            <h2>BRSTM</h2>
+            <h2>Motivation</h2>
           </section>
-          <section><img data-src="images/smash.png" /></section>
 
-          <section><img data-src="images/smash-kh.png" /></section>
+          <section>
+            🎶+📚->👨‍🎓
+
+            <aside class="notes">
+              Back in university. Need music to study. Seek out good background
+              music. Games music are good. Looping all the time.
+            </aside>
+          </section>
+
+          <section>
+            <img data-src="images/smash.png" />
+
+            <aside class="notes">
+              Googled and found this site that lists down game background music
+            </aside>
+          </section>
+
+          <section>
+            <img data-src="images/smash-kh.png" />
+            <aside class="notes">
+              Since all the formats are unknown to me, I chose the 1st option:
+              BRSTM
+            </aside>
+          </section>
+
           <section>
             <h2>BRSTM</h2>
             <ul>
@@ -73,15 +96,85 @@
               <li>Used in Nintendo Wii</li>
               <li>Popular in Nintendo modding community</li>
             </ul>
+            <aside class="notes">
+              Then I googled what is BRSTM
+            </aside>
           </section>
+
           <section>
-            <h2>BRSTM</h2>
-            <p>HTML's <code>&lt;audio /&gt;</code> cannot play it!</p>
+            How to play BRSTM?
+          </section>
+
+          <section>
+            <a href="https://github.com/libertyernie/brawltools">BrawlBox</a>
+            <br />
+            <img data-src="images/bb.png" width="600" />
+          </section>
+
+          <section>
+            <h2>Why recreate it on web?</h2>
+
+            <aside class="notes">
+              Portability. Brawlbox officially only works in Windows
+            </aside>
+          </section>
+
+          <section>
+            <h2>How to play audio on web?</h2>
+            <p class="fragment">
+              <code>&lt;audio /&gt;</code>
+            </p>
+          </section>
+
+          <section>
+            <p>HTML's <code>&lt;audio /&gt;</code> cannot play BRSTM!</p>
           </section>
         </section>
 
         <section>
           <h2>So how?</h2>
+        </section>
+
+        <section>
+          <section>
+            <h2>Let's start an audio player project</h2>
+          </section>
+
+          <section>
+            <h2>But first, we need a name</h2>
+          </section>
+
+          <section>
+            <h2>
+              <a href="https://starwars.fandom.com/wiki/Neeku_Vozo"
+                >Neeku Vozo</a
+              >
+            </h2>
+            <img
+              height="500"
+              data-src="https://vignette.wikia.nocookie.net/starwars/images/4/47/Neeku_Resistance.png/revision/latest?cb=20190101033901"
+            />
+            <div class="credit">
+              via
+              <a
+                href="https://starwars.fandom.com/wiki/File:Neeku_Resistance.png"
+                >Wookiepedia (Star Wars Fandom wiki)</a
+              >
+              (fair use)
+            </div>
+            <aside class="notes">
+              Neeku Vozo is a Star Wars character. Appears in the TV Series
+              "Star Wars Resistance". Kinda noisy. So ... it's a suitable for
+              audio player?
+            </aside>
+          </section>
+
+          <section>
+            <h2>Nikku</h2>
+            <a href="https://github.com/kenrick95/nikku"
+              >github.com/kenrick95/nikku</a
+            >
+          </section>
         </section>
 
         <section>
@@ -226,6 +319,8 @@
           <section>
             <h2>Analog to Digital</h2>
             <aside class="notes">
+              <!-- TODO: Practice the explanation! -->
+              <!-- TODO: Explain "Sample rate" too -->
               Given audio wave, red line; how to represent it digitally?<br />
               One way is to measure the wave amplitude on constant interval
               (sampling)<br />
@@ -250,7 +345,7 @@
             <ul>
               <li>Analog sound wave</li>
               <li>Sampling</li>
-              <li>Quantization</li>
+              <li>Quantization<!-- TODO: Practice the pronounciations! --></li>
               <li>Bit depth</li>
             </ul>
           </section>
@@ -425,14 +520,10 @@
               that is connected to the destination node.
             </aside>
           </section>
-<!-- TODO: motivation; background music; -->
-<!-- TODO: find shorter music, well known game? -->
-<!-- TODO: show the noisy player? -->
-<!-- TODO: explain what are the different ADPCMs? maybe more confusion? -->
-<!-- TODO: explain the name "nikku" -->
-<!-- TODO: change font to "geekier" one? 8-bit pixel font? xkcd font! -->
-<!-- TODO: dark background to match venue? -->
-<!-- https://en.wikipedia.org/wiki/Grieg%27s_music_in_popular_culture#Peer_Gynt -->
+          <!-- TODO: show the noisy player? -->
+          <!-- TODO: explain what are the different ADPCMs? maybe more confusion? -->
+          <!-- TODO: dark background to match venue? -->
+          <!-- https://en.wikipedia.org/wiki/Grieg%27s_music_in_popular_culture#Peer_Gynt -->
           <section>
             <p>Buffer Source node &rarr; Audio Context destination node</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
@@ -622,20 +713,7 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
           -->
 
           <section>
-            <a
-              href="https://github.com/libertyernie/brawltools/blob/master/BrawlLib/Wii/Audio/ADPCMStream.cs"
-              >ADPCMStream.cs</a
-            ><br />
-            <a
-              href="https://github.com/libertyernie/brawltools/blob/master/BrawlLib/Wii/Audio/ADPCMState.cs"
-              >ADPCMState.cs</a
-            >
-            <aside class="notes">
-              Should be somewhere here, but it's still very cryptic
-            </aside>
-          </section>
-          <section>
-            <em>So what I do?</em>
+            <em>How to find relevant codes?</em>
           </section>
 
           <section>
@@ -651,6 +729,20 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
             <aside class="notes">
               and so I thought, between this point and this point, these codes
               are running, so I should replicate those codes in JS.
+            </aside>
+          </section>
+
+          <section>
+            <a
+              href="https://github.com/libertyernie/brawltools/blob/master/BrawlLib/Wii/Audio/ADPCMStream.cs"
+              >ADPCMStream.cs</a
+            ><br />
+            <a
+              href="https://github.com/libertyernie/brawltools/blob/master/BrawlLib/Wii/Audio/ADPCMState.cs"
+              >ADPCMState.cs</a
+            >
+            <aside class="notes">
+              Should be somewhere here, but it's still very cryptic
             </aside>
           </section>
         </section>
@@ -681,7 +773,8 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
 
         <section>
           <section>
-            Is it finished?
+            <h2>Is it finished?</h2>
+            <p class="fragment">No</p>
           </section>
 
           <section>
@@ -696,8 +789,8 @@ If you copy-paste codes that do magic, make sure you copy-paste them fully! (les
 
         <section>
           <section>
-            <h2>Web Audio API</h2>
-            <p>Gotchas</p>
+            <h2>Audio Player</h2>
+            <p>Web Audio API Gotchas</p>
           </section>
           <section>
             <h3>Audio Player</h3>
@@ -819,15 +912,6 @@ Set/unset the current timestamp for play/pause/seek/etc
             <h3>Playback time display (workaround)</h3>
 
             <p>Reimplement timer</p>
-
-            <ul>
-              <li class="fragment">
-                Less accurate
-              </li>
-              <li class="fragment">
-                But I do have all the controls
-              </li>
-            </ul>
 
             <aside class="notes">
               My workaround: Don’t rely on their timer, it’s less accurate, but
