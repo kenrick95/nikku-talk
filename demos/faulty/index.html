@@ -9,11 +9,12 @@
   </head>
   <body>
     <header id="header">
-      <h1>Nikku</h1>
+      <h1>Nikku <span class="warning">[faulty!]</span></h1>
 
       <p>
         Web-based BRSTM player
       </p>
+      <p class="warning">Please lower your speaker volume!</p>
     </header>
     <main id="main">
       <div class="section">
@@ -22,6 +23,7 @@
         </label>
         <input type="file" id="file" accept=".brstm" disabled />
       </div>
+      <button class="section" id="stop">STAAAAHP! 😩</button>
 
       <div class="section" id="form-and-details">
         <div class="column">
@@ -37,8 +39,8 @@
           </details>
         </div>
       </div>
-
       <div class="section error" id="errors"></div>
+
     </main>
     <template id="metadata-row">
       <tr>

@@ -1,3 +1,5 @@
+/* @import '../../lib/font/xkcd-script/xkcd-script.css'; */
+
 body {
   max-width: 40rem;
   padding: 2rem;
@@ -10,6 +12,7 @@ tr,
 summary,
 details {
   font-family: sans-serif;
+  /* font-family: 'xkcd Script', 'Source Sans Pro', Helvetica, sans-serif; */
   line-height: 1.6;
 }
 #metadata-container {
@@ -79,4 +82,11 @@ details {
 input:disabled,
 button:disabled {
   cursor: not-allowed;
+}
+.warning {
+  color: #ff4136;
+}
+#stop {
+  display: none;
+  font-size: 2em;
 }

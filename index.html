@@ -319,13 +319,10 @@
           <section>
             <h2>Analog to Digital</h2>
             <aside class="notes">
-              <!-- TODO: Practice the explanation! -->
-              <!-- TODO: Explain "Sample rate" too -->
-              Given audio wave, red line; how to represent it digitally?<br />
-              One way is to measure the wave amplitude on constant interval
-              (sampling)<br />
-              floating point measurement value to integer space (quantized)<br />
-              blue dots (sampled and quantized); bit depth is 4-bit (-8 to +7)
+              Audio wave is an analog wave (red line). How to represent it in
+              digital format? Measure the wave at constant interval (sampling);
+              value rounded to integer space (quantization); integer space
+              represents bit depth is 4-bit (-8 to +7); sample rate: how often to take measurement each second
             </aside>
             <img
               data-src="https://upload.wikimedia.org/wikipedia/commons/2/21/4-bit-linear-PCM.svg"
@@ -345,8 +342,9 @@
             <ul>
               <li>Analog sound wave</li>
               <li>Sampling</li>
-              <li>Quantization<!-- TODO: Practice the pronounciations! --></li>
+              <li>Quantization</li>
               <li>Bit depth</li>
+              <li>Sample rate</li>
             </ul>
           </section>
 
@@ -520,10 +518,7 @@
               that is connected to the destination node.
             </aside>
           </section>
-          <!-- TODO: show the noisy player? -->
-          <!-- TODO: explain what are the different ADPCMs? maybe more confusion? -->
           <!-- TODO: dark background to match venue? -->
-          <!-- https://en.wikipedia.org/wiki/Grieg%27s_music_in_popular_culture#Peer_Gynt -->
           <section>
             <p>Buffer Source node &rarr; Audio Context destination node</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
@@ -596,6 +591,18 @@
           </section>
           <section>
             <img data-src="images/noise.png" />
+            
+            <iframe
+              class="iframe"
+              data-src="demos/faulty/index.html"
+              width="640"
+              height="360"
+              frameborder="0"
+              marginwidth="0"
+              marginheight="0"
+              scrolling="yes"
+              allowfullscreen
+            ></iframe>
           </section>
         </section>
 
@@ -989,7 +996,7 @@ Set/unset the current timestamp for play/pause/seek/etc
             Web Audio API is kinda difficult to use 😢
           </section>
         </section>
-
+        <!--
         <section>
           <blockquote>Do things, tell people</blockquote>
           <aside class="notes">
@@ -998,7 +1005,7 @@ Set/unset the current timestamp for play/pause/seek/etc
             after finishing it, telling people about it. Either by posting it to
             HN or writing it up in my blog.
           </aside>
-        </section>
+        </section>-->
 
         <section>
           <h2>Kenrick</h2>
