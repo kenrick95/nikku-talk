@@ -541,8 +541,8 @@
           <section>
             <p>Transform PCM into audio buffer</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
-              const audioBuffer = this.audioContext.createBuffer(
-                1,
+              const audioBuffer = audioContext.createBuffer(
+                1, // number of channels
                 pcm.length,
                 metadata.sampleRate
               );
@@ -553,7 +553,7 @@
             <p>Write into source node, and plays it</p>
             <pre><code class="javascript" data-trim contenteditable style="font-size: 18px;" spellcheck="false">
               bufferSource.buffer = audioBuffer;
-              bufferSource.start(0);
+              bufferSource.start(0); // start immediately
             </code></pre>
 
             <div class="fragment">
